@@ -14,8 +14,8 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-
-server.use("/api/users", authenticator, usersRouter);
+// add authenticator on users perhaps later, for now recieve a list
+server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter)
 
 server.get("/", (req, res) => {

@@ -28,7 +28,6 @@ exports.up = function(knex) {
 
 		users.integer('locationsId', 10)
 			.unsigned()
-	        .notNullable()
 	        .references('id')
 	        .inTable('locations')
 			.onUpdate('CASCADE')
@@ -48,14 +47,12 @@ exports.up = function(knex) {
 			.defaultTo(0);
 		issues.integer('userId', 9)
 			.unsigned()
-	        .notNullable()
 	        .references('id')
 	        .inTable('users')
 			.onUpdate('CASCADE')
         	.onDelete('CASCADE');
         issues.integer('locationsId', 9)
 			.unsigned()
-	        .notNullable()
 	        .references('id')
 	        .inTable('locations')
 			.onUpdate('CASCADE')
