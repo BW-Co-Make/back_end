@@ -7,9 +7,11 @@ router.get("/", (req, res) => {
 //   console.log('token', req.decodedToken)
   Users.find()
     .then(users => {
-      res.json(users);
+      res.status(200).json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+        res.status(500).json({error: 'Server could not get the list of users', error: err})
+    })
 });
 
 router.get("/:id", (req, res) => {
@@ -17,10 +19,10 @@ router.get("/:id", (req, res) => {
     // console.log('token', req.decodedToken)
     Users.findById(id)
       .then(user => {
-        res.json(user);
+        res.status(200).json(user);
       })
       .catch(err => {
-        res.status(500).json({error: 'Server could not get the user'})
+        res.status(500).json({error: 'Server could not get the user', error: err})
     })
   });
 
