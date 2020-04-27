@@ -4,16 +4,9 @@ const Users = require("./users-model.js");
 
 const check = require('../middleware/index')
 
-router.post('/',  check.validateUser, (req, res) => {
-    Users.add(req.body)
-    .then(user => {
-      res.status(201).json(user)
-    })
-    .catch(err => {
-      res.status(500).json({error: "Server could not post new user"})
-    });
-  });
-  
+const alfred = require('../auth/authenticator')
+// if authenticator is a problem for FE can take it out until tables are healthy. Named Alfred cuz he guards the bat cave
+
 router.get("/", (req, res) => {
 //   console.log('token', req.decodedToken)
   Users.find()
@@ -30,7 +23,7 @@ router.get("/:id", check.validateUserId, (req, res) => {
     res.status(200).json(req.user);
 });
  
-  router.put('/:id', check.validateUserId, check.validateUser, (req, res) => {
+  router.put('/:id', alfred, check.validateUserId, check.validateUser, (req, res) => {
     Users.update(req.params.id, req.body)
     .then(user => {
       res.status(200).json(user)
@@ -40,7 +33,7 @@ router.get("/:id", check.validateUserId, (req, res) => {
     });
   });
 
-  router.delete('/:id', check.validateUserId, (req, res) => {
+  router.delete('/:id', alfred, check.validateUserId, (req, res) => {
     Users.remove(req.params.id)
     .then(user => {
       res.status(200).json({message: 'The user was successfully deleted'})

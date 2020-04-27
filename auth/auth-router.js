@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken"); // npm i jsonwebtoken
 
 const Users = require("../users/users-model");
 const secrets = require("../api/secrets");
+const check = require('../middleware/index')
 
-router.post("/register", (req, res) => {
+router.post("/register", check.validateUser, (req, res) => {
   let user = req.body; // username, password
 
   // rounds are 2 to the N times
