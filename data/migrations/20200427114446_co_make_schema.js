@@ -46,7 +46,7 @@ exports.up = function(knex) {
 			.notNullable();
 		issues.integer('upvote', 10)
 			.defaultTo(0);
-		issues.integer('created_by', 9)
+		issues.integer('userId', 9)
 			.unsigned()
 	        .notNullable()
 	        .references('id')
@@ -62,6 +62,7 @@ exports.up = function(knex) {
         	.onDelete('CASCADE');
 	})
 
+/*
 	.createTable('users-locations', userLocations => {
 		userLocations.increments();
 
@@ -98,14 +99,15 @@ exports.up = function(knex) {
 			.onUpdate('CASCADE')
         	.onDelete('CASCADE');
 	})
+*/
 
 };
 
 exports.down = function(knex) {
  	return knex.schema
-		 	.dropTableIfExists('locations-issues');
-		 	.dropTableIfExists('users-locations');
-		 	.dropTableIfExists('issues');
-		 	.dropTableIfExists('users');
+		 	// .dropTableIfExists('locations-issues')
+		 	// .dropTableIfExists('users-locations')
+		 	.dropTableIfExists('issues')
+		 	.dropTableIfExists('users')
 		 	.dropTableIfExists('locations');
 };
