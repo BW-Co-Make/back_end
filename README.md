@@ -85,7 +85,7 @@ URL: /api/users/:id
 > Will receive a 404 response if parameter ID is invalid
 ```javascript
 {
-  "message": "User not found"
+  "message": "User with the id of ${id} was not found"
 }
 ```
 ##### 500 (Internal Server Error)

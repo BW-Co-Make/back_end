@@ -24,12 +24,19 @@ function validateUserId(req, res, next) {
     });
 }
 
+// use this for post body validation
 function validateUser(req, res, next) {
   if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
      return res.status(400).json({ message: "missing user data" })
    } else {
-    if (!req.body.name) {
-     return res.status(400).json({ message: "missing required name field" })
+    if (!req.body.username) {
+     return res.status(400).json({ message: "missing required field" })
+   } else if(!req.body.first_name){
+    return res.status(400).json({ message: "missing required field"})
+   } else if(!req.body.last_name) {
+    return res.status(400).json({ message: "missing required field"})
+   } else if(!req.body.zip_code) {
+    return res.status(400).json({ message: "missing required field"})
    }
    next();
    }
