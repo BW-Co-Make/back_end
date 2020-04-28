@@ -16,7 +16,8 @@ server.use(cors());
 
 // add authenticator on users perhaps later, for now recieve a list
 server.use("/api/users", usersRouter);
-server.use("/api/auth", authRouter)
+server.use("/api/auth", authRouter);
+server.use("/api/issues", authRouter);
 
 server.get("/", (req, res) => {
   res.json({ api: "up" });

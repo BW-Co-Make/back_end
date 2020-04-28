@@ -9,7 +9,7 @@ module.exports = {
   update,
   remove,
   addUserIssues,
-//   getUserIssues,
+  getUserIssues,
 //   updateIssues,
 //   removeIssue
 };
@@ -64,12 +64,12 @@ async function addUserIssues(issue){
     return issue;
 }
 
-// function getUserIssues(id){
-//     return db("issues")
-//     .join("users", "users.id", "issues.id")
-//     .where("users.id", id)
-//     .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
-// };
+function getUserIssues(id){
+    return db("issues")
+    .join("users", "users.id", "issues.id")
+    .where("users.id", id)
+    .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
+};
 
 // function updateIssues(id, changes) {
 //     return db('issues')
