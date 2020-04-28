@@ -60,8 +60,8 @@ function remove(id) {
 };
 
 async function addUserIssues(issue){
-    const [id] = await db("issues").insert(issue)
-    return issue;
+    const [id] = await db("issues").insert(issue, "id")
+    return getUserIssues(id);
 }
 
 function getUserIssues(id){
