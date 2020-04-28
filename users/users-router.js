@@ -45,8 +45,9 @@ router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (re
     const newIssue = req.body;
     newIssue.userId = id; // assign user id to body
     Users.findUserLocation(id).then(userLocation =>{
-        let location = userLocation; // assign location foreign key
-        newIssue.locationId = location; // add foreign key to issue body
+        let location = userLocation[0]; // assign location foreign key
+        newIssue.zip_code = location.zip_code
+        newIssue.locationId = location.locationId; // add foreign key to issue body
         Users.addUserIssues(newIssue)
         .then(user => {
           res.status(200).json(user)

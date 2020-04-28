@@ -39,7 +39,7 @@ function findUserLocation(id) {
     return db("users")
     .join("users-location as ul", "ul.userId", "users.id")
     .where("ul.userId", id)
-    .select("ul.locationId");
+    .select("ul.locationId", "users.zip_code"); // can select users.zip_code so users don't have to input it
   }
 
 
