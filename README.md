@@ -210,7 +210,7 @@ URL: /api/users/:id
 }
 ```
 
-### Get A Single User's Issue
+### GET A SINGLE USER'S ISSUES
 HTTP Request: GET
 
 URL: /api/users/:id/issues
@@ -265,10 +265,10 @@ URL: /api/users/:id/issues
 }
 ```
 
-### Post an Issue (Restricted Route)
+### POST AN ISSUE (Restricted Route)
 HTTP Request: POST
 
-URL: /api/:id/issues
+URL: /api/issues
 
 ##### Body
 | Name        | Type    | Required  | Description                                             |

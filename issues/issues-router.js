@@ -46,15 +46,24 @@ router.get("/", (req, res) => {
         });
       });
      
+      router.put('/:id', alfred, check.validateIssueId, (req, res) => {
+        Issues.update(req.params.id, req.body)
+        .then(issue => {
+          res.status(200).json(issue)
+        })
+        .catch(err => {
+          res.status(500).json({message: "Server could not update user", error: err})
+        });
+      });
     
     
-      router.delete('/:id', alfred, check.validateUserId, (req, res) => {
-        Users.remove(req.params.id)
+      router.delete('/:id', alfred, check.validateIssueId, (req, res) => {
+        Issues.remove(req.params.id)
         .then(user => {
-          res.status(200).json({message: 'The user was successfully deleted'})
+          res.status(200).json({message: 'The issue was successfully deleted'})
         })
         .catch(err=>{
-          res.status(500).json({message: "Server failed to remove the user", error: err})
+          res.status(500).json({message: "Server failed to remove the issue", error: err})
         })
       });
 
