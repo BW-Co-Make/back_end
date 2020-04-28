@@ -209,6 +209,61 @@ URL: /api/users/:id
   "error": "Server error information"
 }
 ```
+
+### Get A Single User's Issue
+HTTP Request: GET
+
+URL: /api/users/:id/issues
+
+#### Response
+##### 200 (OK)
+> Will receive a 200 response with a user object
+```javascript
+{
+    "id": 1,
+    "username": "dark_knight",
+    "first_name": "Bruce",
+    "last_name": "Wayne",
+    "zip_code": "53540",
+    "issues": [
+        {
+            "id": 1,
+            "zip_code": "53540",
+            "title": "ACE Chemicals",
+            "post": "Can we please just level this place?"
+        }
+    ]
+}
+```
+##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+> Will receive a 400 response if required information is missing from the body
+```javascript
+{
+  "message": "No credentials provided"
+}
+```
+##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+> Will receive a 401 response if credentials are invalid
+```javascript
+{
+  "message": "Access Denied: Unauthorized"
+}
+```
+##### 404 (Not Found)
+> Will receive a 404 response if parameter ID is invalid
+```javascript
+{
+  "message": "User with the id of ${id} was not found"
+}
+```
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "message": "The user information could not be retrieved",
+  "error": "Server error information"
+}
+```
 *** ***
 ### Update User Information
 HTTP Request: PUT

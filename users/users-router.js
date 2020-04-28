@@ -22,6 +22,23 @@ router.get("/:id", check.validateUserId, (req, res) => {
     // console.log('token', req.decodedToken)
     res.status(200).json(req.user);
 });
+
+// get user's issues
+router.get("/:id/issues", check.validateUserId, (req, res) => {
+    // remove when (successfully) solved adding issues array to user
+    const { id } = req.params;
+    let issues = []
+    Users.getUserIssues(id)
+    .then(userIssues => {
+        const response = req.user;
+        response.issues = userIssues;
+        res.status(200).json(response);
+    })
+    .catch(err => {
+        res.status(500).json({errorMessage: 'Server could not get the list of user\'s issues', error: err})
+    })
+    
+});
  
   router.put('/:id', alfred, check.validateUserId, check.validateUser, (req, res) => {
     Users.update(req.params.id, req.body)
