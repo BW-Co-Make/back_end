@@ -377,7 +377,7 @@ URL: /api/users/:id
 ```
 
 *** ***
-# ~~~~~~~~~~~~~~~ Locations ~~~~~~~~~~~~~~~~~~~~~
+# ~~~ Locations ~~~
 
 ## GET Requests (GET)
 
@@ -387,6 +387,7 @@ URL: /api/users/:id
   - Example Response -
 
     ## Success
+    ```
     {
       "id": 1,
       "zip_code": "53540"
@@ -399,12 +400,13 @@ URL: /api/users/:id
       "id": 3,
       "zip_code": "80537"
     }
-
+    ```
     ## Error
-
+    ```
     {
       "error": "Server could not get Locations"
     }
+    ```
 
 ### Get Specific Location
 #### /api/locations/:id
@@ -412,15 +414,19 @@ URL: /api/users/:id
   - Example Response -
 
   ## Success
+  ```
   {
     "id": 3,
     "zip_code": "80537"
   }
+  ```
 
   ## Error
+  ```
   {
     "error": "Server could not get Location"
   }
+  ```
 
 ### Get Location issues
 ####  /api/locations/issues/:id
@@ -428,6 +434,7 @@ URL: /api/users/:id
   - Example Response -
 
     ## Success
+    ```
    {
       "id": 2,
       "zip_code": "80537",
@@ -455,12 +462,14 @@ URL: /api/users/:id
       "userId": 1,
       "locationsId": 3
     }
+    ```
 
     ## Error
+    ```
     {
       "error": "Server could not get location issues"
     }
-
+    ```
 
 ## Update Requests (PUT)
 
@@ -475,11 +484,15 @@ URL: /api/users/:id
   - Example Response -
 
   ## Success
+  ```
   {
       "message": "The locations was successfully deleted"
   }
+  ```
 
   ## Error
+  ```
   {
       "error": "Server failed to remove the location"
   }
+  ```
