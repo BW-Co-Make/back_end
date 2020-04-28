@@ -9,7 +9,7 @@ module.exports = {
   update,
   remove,
   addUserIssues,
-  getUserIssues,
+  getUserIssues
 //   updateIssues,
 //   removeIssue
 };
@@ -36,7 +36,7 @@ function findById(id) {
 };
 
 function findUserLocation(id) {
-
+    console.log('2', id)
     // What this SHOULD do is grab the locationId from the joint table so I can assign it to the new issue
     return db("users")
     .join("users_locations as ul", "ul.usersId", "users.id")
@@ -60,13 +60,14 @@ function remove(id) {
 };
 
 async function addUserIssues(issue){
+    console.log('5', issue)
     const [id] = await db("issues").insert(issue, "id")
-    return getUserIssues(id);
+    return issue;
 }
 
 function getUserIssues(id){
-    return db("issues")
-    .join("users", "users.id", "issues.id")
+    return db("users")
+    .join("issues", "issues.userId", "users.id")
     .where("users.id", id)
     .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
 };

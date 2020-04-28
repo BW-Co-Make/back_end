@@ -26,19 +26,20 @@ router.get("/", (req, res) => {
         let id = req.decodedToken.userId
         const newIssue = req.body;
         newIssue.userId = id; // assign user id to body
-        console.log(newIssue)
+        console.log('1', newIssue)
         Users.findUserLocation(id)
         .then(userLocation =>{
-            console.log('userLocation', userLocation)
+            console.log('3', userLocation)
             let zipId = userLocation[0].locationsId;
             let zipCode = userLocation[0].zip_code;
             // assign location foreign key and zip_code
             newIssue.zip_code = zipCode;
             newIssue.locationsId = zipId;
-            console.log('the newIssue object', newIssue) // add foreign key to issue body
-            Users.addUserIssues(newIssue)
-            .then(user => {
-              res.status(200).json(user)
+            console.log('4', newIssue) // add foreign key to issue body
+            Issues.add(newIssue)
+            .then(issue => {
+                console.log('6', issue)
+              res.status(200).json(issue)
             })
             .catch(err => {
                 res.status(500).json({error: "Server could not add issue when assigning location", error: err})

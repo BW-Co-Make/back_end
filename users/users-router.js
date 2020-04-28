@@ -30,6 +30,7 @@ router.get("/:id/issues", check.validateUserId, (req, res) => {
     Users.getUserIssues(id)
     .then(userIssues => {
         console.log('issues in user issues', userIssues)
+        console.log('req.user', req.user)
         const response = req.user;
         response.issues = userIssues;
         res.status(200).json(response);
