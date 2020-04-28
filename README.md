@@ -330,7 +330,7 @@ or
 ### UPDATE USER ISSUE
 HTTP Request: PUT
 
-URL: /api/users/:id/issues/:issueid
+URL: /api/issues/:id
 
 ##### Body
 | Name        | Type    | Required  | Description                                             |
@@ -392,7 +392,7 @@ URL: /api/users/:id/issues/:issueid
 ### DELETE AN ISSUE
 HTTP Request: DELETE
 
-URL: /api/users/:id/issues/:issueid
+URL: /api/issues/:id
 
 #### Response
 ##### 200 (OK)

@@ -61,7 +61,15 @@ router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (re
     });
   });
  
-
+  router.put('/:id', alfred, check.validateUserId, check.validateUser, (req, res) => {
+    Users.update(req.params.id, req.body)
+    .then(user => {
+      res.status(200).json(user)
+    })
+    .catch(err => {
+      res.status(500).json({error: "Server could not update user", error: err})
+    });
+  });
 
   router.delete('/:id', alfred, check.validateUserId, (req, res) => {
     Users.remove(req.params.id)
