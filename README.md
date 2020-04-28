@@ -385,27 +385,26 @@ URL: /api/users/:id
 ####  /api/locations
 
   - Example Response -
-
-    ## Success
+    ##### Success
+    ``` javascript
+      {
+        "id": 1,
+        "zip_code": "53540"
+      },
+      {
+        "id": 2,
+        "zip_code": "62960"
+      },
+      {
+        "id": 3,
+        "zip_code": "80537"
+      }
     ```
-    {
-      "id": 1,
-      "zip_code": "53540"
-    },
-    {
-      "id": 2,
-      "zip_code": "62960"
-    },
-    {
-      "id": 3,
-      "zip_code": "80537"
-    }
-    ```
-    ## Error
-    ```
-    {
-      "error": "Server could not get Locations"
-    }
+    ##### Error
+    ``` javascript
+      {
+        "error": "Server could not get Locations"
+      }
     ```
 
 ### Get Specific Location
@@ -413,19 +412,19 @@ URL: /api/users/:id
 
   - Example Response -
 
-  ## Success
-  ```
-  {
-    "id": 3,
-    "zip_code": "80537"
-  }
+  ##### Success
+  ``` javascript
+    {
+      "id": 3,
+      "zip_code": "80537"
+    }
   ```
 
   ## Error
-  ```
-  {
-    "error": "Server could not get Location"
-  }
+  ``` javascript
+    {
+      "error": "Server could not get Location"
+    }
   ```
 
 ### Get Location issues
@@ -433,42 +432,42 @@ URL: /api/users/:id
 
   - Example Response -
 
-    ## Success
-    ```
-   {
-      "id": 2,
-      "zip_code": "80537",
-      "title": "Pothole",
-      "post": "Its ruining all the cars!",
-      "upvote": 0,
-      "userId": 4,
-      "locationsId": 3
-    },
-    {
-      "id": 3,
-      "zip_code": "80537",
-      "title": "Dogs barking",
-      "post": "Neighbors dogs never stop barking!",
-      "upvote": 0,
-      "userId": 4,
-      "locationsId": 3
-    },
-    {
-      "id": 4,
-      "zip_code": "80537",
-      "title": "Loud Music",
-      "post": "Good music just too loud",
-      "upvote": 0,
-      "userId": 1,
-      "locationsId": 3
-    }
-    ```
+    ##### Success
+    ``` javascript
+      {
+        "id": 2,
+        "zip_code": "80537",
+        "title": "Pothole",
+        "post": "Its ruining all the cars!",
+        "upvote": 0,
+        "userId": 4,
+        "locationsId": 3
+      },
+      {
+        "id": 3,
+        "zip_code": "80537",
+        "title": "Dogs barking",
+        "post": "Neighbors dogs never stop barking!",
+        "upvote": 0,
+        "userId": 4,
+        "locationsId": 3
+      },
+      {
+        "id": 4,
+        "zip_code": "80537",
+        "title": "Loud Music",
+        "post": "Good music just too loud",
+        "upvote": 0,
+        "userId": 1,
+        "locationsId": 3
+      }
+    ``` 
 
-    ## Error
-    ```
-    {
-      "error": "Server could not get location issues"
-    }
+    ##### Error
+    ``` javascript
+      {
+        "error": "Server could not get location issues"
+      }
     ```
 
 ## Update Requests (PUT)
@@ -483,16 +482,16 @@ URL: /api/users/:id
 #### /api/locations/:id
   - Example Response -
 
-  ## Success
-  ```
-  {
-      "message": "The locations was successfully deleted"
-  }
+  ##### Success
+  ```javascript
+    {
+        "message": "The locations was successfully deleted"
+    }
   ```
 
-  ## Error
-  ```
-  {
-      "error": "Server failed to remove the location"
-  }
+  ##### Error
+  ```javascript
+    {
+        "error": "Server failed to remove the location"
+    }
   ```
