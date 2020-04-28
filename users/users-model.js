@@ -7,7 +7,8 @@ module.exports = {
   findById,
   update,
   remove,
-  getUserIssues
+  addUserIssues,
+  getUserIssues,
 };
 
 function find() {
@@ -43,8 +44,11 @@ function remove(id) {
       .del();
 };
 
+function addUserIssues(id){
+    return null;
+}
+
 function getUserIssues(id){
-    console.log(id)
     return db("issues")
     .join("users", "users.id", "issues.id")
     .where("users.id", id)
