@@ -39,9 +39,9 @@ function findUserLocation(id) {
 
     // What this SHOULD do is grab the locationId from the joint table so I can assign it to the new issue
     return db("users")
-    .join("users-location as ul", "ul.userId", "users.id")
-    .where("ul.userId", id)
-    .select("ul.locationId", "users.zip_code"); // can select users.zip_code so users don't have to input it
+    .join("users_locations as ul", "ul.usersId", "users.id")
+    .where("ul.usersId", id)
+    .select("ul.locationsId", "users.zip_code"); // can select users.zip_code so users don't have to input it
   }
 
 

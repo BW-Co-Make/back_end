@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
     });
     
     router.get("/:id", check.validateIssueId, (req, res) => {
-        
         res.status(200).json(req.issue);
     });
     
@@ -28,11 +27,15 @@ router.get("/", (req, res) => {
         const newIssue = req.body;
         newIssue.userId = id; // assign user id to body
         console.log(newIssue)
-        Users.findUserLocation(id).then(userLocation =>{
-            console.log(userLocation);
-            let location = userLocation[0]; // assign location foreign key
-            newIssue.zip_code = location.zip_code
-            newIssue.locationId = location.locationId; // add foreign key to issue body
+        Users.findUserLocation(id)
+        .then(userLocation =>{
+            console.log('userLocation', userLocation)
+            let zipId = userLocation[0].locationsId;
+            let zipCode = userLocation[0].zip_code;
+            // assign location foreign key and zip_code
+            newIssue.zip_code = zipCode;
+            newIssue.locationsId = zipId;
+            console.log('the newIssue object', newIssue) // add foreign key to issue body
             Users.addUserIssues(newIssue)
             .then(user => {
               res.status(200).json(user)
