@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  findUserLocation,
   update,
   remove,
   addUserIssues,
@@ -30,7 +31,17 @@ function findById(id) {
     .select("id", "username", "first_name", "last_name", "zip_code")
     .where({ id })
     .first();
-}
+};
+
+function findUserLocation(id) {
+
+    // What this SHOULD do is grab the locationId from the joint table so I can assign it to the new issue
+    return db("users")
+    .join("users-location as ul", "ul.userId", "users.id")
+    .where("ul.userId", id)
+    .select("ul.locationId");
+  }
+
 
 function update(id, changes) {
     return db('users')
@@ -44,8 +55,9 @@ function remove(id) {
       .del();
 };
 
-function addUserIssues(id){
-    return null;
+async function addUserIssues(issue){
+    const [id] = await db("issues").insert(issue)
+    return issue;
 }
 
 function getUserIssues(id){
