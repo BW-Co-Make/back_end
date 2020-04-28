@@ -40,26 +40,26 @@ router.get("/:id/issues", check.validateUserId, (req, res) => {
 });
 
 // User end point to post an issue
-router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (req, res) => {
-    const { id } = req.params;
-    const newIssue = req.body;
-    newIssue.userId = id; // assign user id to body
-    Users.findUserLocation(id).then(userLocation =>{
-        let location = userLocation[0]; // assign location foreign key
-        newIssue.zip_code = location.zip_code
-        newIssue.locationId = location.locationId; // add foreign key to issue body
-        Users.addUserIssues(newIssue)
-        .then(user => {
-          res.status(200).json(user)
-        })
-        .catch(err => {
-            res.status(500).json({error: "Server could not add issue when assigning location", error: err})
-          });
-    })
-    .catch(err => {
-      res.status(500).json({error: "Server could not add issue due to location error", error: err})
-    });
-  });
+// router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (req, res) => {
+//     const { id } = req.params;
+//     const newIssue = req.body;
+//     newIssue.userId = id; // assign user id to body
+//     Users.findUserLocation(id).then(userLocation =>{
+//         let location = userLocation[0]; // assign location foreign key
+//         newIssue.zip_code = location.zip_code
+//         newIssue.locationId = location.locationId; // add foreign key to issue body
+//         Users.addUserIssues(newIssue)
+//         .then(user => {
+//           res.status(200).json(user)
+//         })
+//         .catch(err => {
+//             res.status(500).json({error: "Server could not add issue when assigning location", error: err})
+//           });
+//     })
+//     .catch(err => {
+//       res.status(500).json({error: "Server could not add issue due to location error", error: err})
+//     });
+//   });
  
   router.put('/:id', alfred, check.validateUserId, check.validateUser, (req, res) => {
     Users.update(req.params.id, req.body)
