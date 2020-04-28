@@ -1,8 +1,10 @@
 const Users = require('../users/users-model')
+const Issues = require('../issues/issues-model')
 
 module.exports = {
     validateUser,
     validateUserId,
+    validateIssueId,
     validateIssue
 }
 
@@ -43,6 +45,22 @@ function validateUser(req, res, next) {
 }
 
 // middleware to handle posting user issue needs to be adjusted
+
+function validateIssueId(req, res, next) {
+  const { id } = req.params;
+  Issues.findById(id)
+  .then(issue => {
+    if(issue){
+      req.issue = issue;
+      next();
+    } else {
+      res.status(404).json({message: `Issue with the id of ${id} was not found`})
+    }
+  })
+  .catch(err => {
+    res.status(500).json({message: 'Could not get issue'})
+  });
+}
 
 function validateIssue(req, res, next) {
   if(req.body.constructor === Object && Object.keys(req.body).length === 0) {

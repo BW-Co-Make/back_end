@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const Issues = require("./issues-model");
+const Users = require("../users/users-model");
 
 const check = require('../middleware/index');
 
@@ -17,33 +18,18 @@ router.get("/", (req, res) => {
         })
     });
     
-    router.get("/:id", check.validateUserId, (req, res) => {
-        // console.log('token', req.decodedToken)
-        res.status(200).json(req.user);
-    });
-    
-    // get user's issues
-    router.get("/:id/issues", check.validateUserId, (req, res) => {
-        // remove when (successfully) solved adding issues array to user
-        const { id } = req.params;
-        Users.getUserIssues(id)
-        .then(userIssues => {
-            const response = req.user;
-            response.issues = userIssues;
-            res.status(200).json(response);
-        })
-        .catch(err => {
-            res.status(500).json({errorMessage: 'Server could not get the list of user\'s issues', error: err})
-        })
+    router.get("/:id", check.validateIssueId, (req, res) => {
         
+        res.status(200).json(req.issue);
     });
     
-    // User end point to post an issue
-    router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (req, res) => {
-        const { id } = req.params;
+    router.post('/', alfred, (req, res) => {
+        let id = req.decodedToken.userId
         const newIssue = req.body;
         newIssue.userId = id; // assign user id to body
+        console.log(newIssue)
         Users.findUserLocation(id).then(userLocation =>{
+            console.log(userLocation);
             let location = userLocation[0]; // assign location foreign key
             newIssue.zip_code = location.zip_code
             newIssue.locationId = location.locationId; // add foreign key to issue body
@@ -56,7 +42,7 @@ router.get("/", (req, res) => {
               });
         })
         .catch(err => {
-          res.status(500).json({error: "Server could not add issue due to location error", error: err})
+          res.status(500).json({message: "Server could not add issue due to location error", error: err})
         });
       });
      
@@ -71,3 +57,5 @@ router.get("/", (req, res) => {
           res.status(500).json({message: "Server failed to remove the user", error: err})
         })
       });
+
+module.exports = router;
