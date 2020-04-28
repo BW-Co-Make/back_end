@@ -3,6 +3,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 
+const locationsRouter = require("../locations/locations-router.js");
 const usersRouter = require("../users/users-router.js");
 const authRouter = require("../auth/auth-router.js");
 const authenticator = require("../auth/authenticator");
@@ -16,6 +17,7 @@ server.use(cors());
 
 // add authenticator on users perhaps later, for now recieve a list
 server.use("/api/users", usersRouter);
+server.use("/api/locations", locationsRouter);
 server.use("/api/auth", authRouter)
 
 server.get("/", (req, res) => {
