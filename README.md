@@ -544,3 +544,123 @@ URL: /api/users/:id
   "error": "Server error information"
 }
 ```
+
+*** ***
+# ~~~ Locations ~~~
+
+## GET Requests (GET)
+
+### Get all Locations
+####  /api/locations
+
+  - Example Response -
+    ##### Success
+    ``` javascript
+      {
+        "id": 1,
+        "zip_code": "53540"
+      },
+      {
+        "id": 2,
+        "zip_code": "62960"
+      },
+      {
+        "id": 3,
+        "zip_code": "80537"
+      }
+    ```
+    ##### Error
+    ``` javascript
+      {
+        "error": "Server could not get Locations"
+      }
+    ```
+
+### Get Specific Location
+#### /api/locations/:id
+
+  - Example Response -
+
+  ##### Success
+  ``` javascript
+    {
+      "id": 3,
+      "zip_code": "80537"
+    }
+  ```
+
+  ## Error
+  ``` javascript
+    {
+      "error": "Server could not get Location"
+    }
+  ```
+
+### Get Location issues
+####  /api/locations/issues/:id
+
+  - Example Response -
+
+    ##### Success
+    ``` javascript
+      {
+        "id": 2,
+        "zip_code": "80537",
+        "title": "Pothole",
+        "post": "Its ruining all the cars!",
+        "upvote": 0,
+        "userId": 4,
+        "locationsId": 3
+      },
+      {
+        "id": 3,
+        "zip_code": "80537",
+        "title": "Dogs barking",
+        "post": "Neighbors dogs never stop barking!",
+        "upvote": 0,
+        "userId": 4,
+        "locationsId": 3
+      },
+      {
+        "id": 4,
+        "zip_code": "80537",
+        "title": "Loud Music",
+        "post": "Good music just too loud",
+        "upvote": 0,
+        "userId": 1,
+        "locationsId": 3
+      }
+    ``` 
+
+    ##### Error
+    ``` javascript
+      {
+        "error": "Server could not get location issues"
+      }
+    ```
+
+## Update Requests (PUT)
+
+### Update Zipcode
+####  /api/locations/:id
+
+
+## Delete Request (DELETE)
+
+### Delete
+#### /api/locations/:id
+  - Example Response -
+
+  ##### Success
+  ```javascript
+    {
+        "message": "The locations was successfully deleted"
+    }
+  ```
+
+  ##### Error
+  ```javascript
+    {
+        "error": "Server failed to remove the location"
+    }
+  ```

@@ -13,19 +13,14 @@ exports.up = function(knex) {
 		users.string('username', 64)
 			.notNullable()
 			.unique();
-
 		users.string('password', 64)
 			.notNullable();
-
 		users.string('first_name', 64)
 			.notNullable();
-
 		users.string('last_name', 64)
 			.notNullable();
-
 		users.string('zip_code', 10)
 			.notNullable();
-
 		users.integer('locationsId', 10)
 			.unsigned()
 	        .references('id')
