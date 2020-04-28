@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const usersRouter = require("../users/users-router.js");
 const authRouter = require("../auth/auth-router.js");
+const issuesRouter = require("../issues/issues-router")
 const authenticator = require("../auth/authenticator");
 
 const server = express();
@@ -16,7 +17,8 @@ server.use(cors());
 
 // add authenticator on users perhaps later, for now recieve a list
 server.use("/api/users", usersRouter);
-server.use("/api/auth", authRouter)
+server.use("/api/auth", authRouter);
+server.use("/api/issues", issuesRouter);
 
 server.get("/", (req, res) => {
   res.json({ api: "up" });
