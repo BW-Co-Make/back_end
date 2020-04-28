@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken"); // npm i jsonwebtoken
 
 const Users = require("../users/users-model");
 const secrets = require("../api/secrets");
+const check = require('../middleware/index')
 
-router.post("/register", (req, res) => {
+router.post("/register", check.validateUser, (req, res) => {
   let user = req.body; // username, password
 
   // rounds are 2 to the N times
@@ -22,7 +23,7 @@ router.post("/register", (req, res) => {
     res.status(201).json(saved)
   }).catch(error => {
     console.log(error);
-    res.status(500).json({ errorMessage: error.message })
+    res.status(500).json({ message: "There was an error during user registration, please try again later", errorMessage: error.message })
   })
 });
 
@@ -40,12 +41,12 @@ router.post("/login", (req, res) => {
       // send the token to the client
       res.status(200).json({ message: `Welcome ${username}`, token})
     } else {
-      res.status(401).json({ message: 'Can\'t sit here'})
+      res.status(401).json({ message: 'Access Denied: Unauthorized'})
     }
 
   }).catch(error => {
     console.log(error);
-    res.status(500).json({ errorMessage: error.message })
+    res.status(500).json({ message: "There was an error during user login, please try again later",errorMessage: error.message })
   })
 });
 
