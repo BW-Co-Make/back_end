@@ -61,6 +61,32 @@ router.post('/:id/issues', alfred, check.validateUserId, check.validateUser, (re
     });
   });
  
+// update user issues 
+// does this need an issues router?
+
+router.put('/:id/issues/:issueid', alfred, check.validateUserId, check.validateUser, (req, res) => {
+    // let updated = req.body // pretty sure the below will work 😅
+    Users.updateIssues(req.params.issueid, req.body)
+    .then(issue => {
+      res.status(200).json(issue)
+    })
+    .catch(err => {
+      res.status(500).json({error: "Server could not update issue", error: err})
+    });
+  });
+
+// delete user issue
+router.delete('/:id/issues/:issueid', alfred, check.validateUserId, (req, res) => {
+    Users.removeIssue(req.params.issueid)
+    .then(user => {
+      res.status(200).json({message: 'The issue was successfully deleted'})
+    })
+    .catch(err=>{
+      res.status(500).json({message: "Server failed to remove the user", error: err})
+    })
+  });
+
+// update user
   router.put('/:id', alfred, check.validateUserId, check.validateUser, (req, res) => {
     Users.update(req.params.id, req.body)
     .then(user => {

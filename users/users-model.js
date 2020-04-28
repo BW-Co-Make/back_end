@@ -10,6 +10,8 @@ module.exports = {
   remove,
   addUserIssues,
   getUserIssues,
+  updateIssues,
+  removeIssue
 };
 
 function find() {
@@ -49,6 +51,8 @@ function update(id, changes) {
       .update(changes);
 };
 
+
+
 function remove(id) {
     return db('users')
       .where('id', id)
@@ -65,4 +69,16 @@ function getUserIssues(id){
     .join("users", "users.id", "issues.id")
     .where("users.id", id)
     .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
-}
+};
+
+function updateIssues(id, changes) {
+    return db('issues')
+      .where({ id })
+      .update(changes);
+};
+
+function removeIssue(id) {
+    return db('issues')
+      .where('id', id)
+      .del();
+};
