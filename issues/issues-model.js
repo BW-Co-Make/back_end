@@ -8,14 +8,10 @@ module.exports = {
   findUserLocation,
   update,
   remove,
-  addUserIssues,
-//   getUserIssues,
-//   updateIssues,
-//   removeIssue
 };
 
 function find() {
-  return db("users").select("id", "username", "first_name", "last_name", "zip_code");
+  return db("issues").select("id","zip_code", "title", "post", "upvote");
 }
 
 function findBy(filter) {
@@ -64,21 +60,21 @@ async function addUserIssues(issue){
     return issue;
 }
 
-// function getUserIssues(id){
-//     return db("issues")
-//     .join("users", "users.id", "issues.id")
-//     .where("users.id", id)
-//     .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
-// };
+function getUserIssues(id){
+    return db("issues")
+    .join("users", "users.id", "issues.id")
+    .where("users.id", id)
+    .select("issues.id", "issues.zip_code", "issues.title", "issues.post")
+};
 
-// function updateIssues(id, changes) {
-//     return db('issues')
-//       .where({ id })
-//       .update(changes);
-// };
+function updateIssues(id, changes) {
+    return db('issues')
+      .where({ id })
+      .update(changes);
+};
 
-// function removeIssue(id) {
-//     return db('issues')
-//       .where('id', id)
-//       .del();
-// };
+function removeIssue(id) {
+    return db('issues')
+      .where('id', id)
+      .del();
+};
