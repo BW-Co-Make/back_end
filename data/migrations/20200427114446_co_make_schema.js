@@ -54,7 +54,6 @@ exports.up = function(knex) {
         	.onDelete('CASCADE');
 	})
 
-/*
 	.createTable('users-locations', userLocations => {
 		userLocations.increments();
 
@@ -74,6 +73,7 @@ exports.up = function(knex) {
         	.onDelete('CASCADE');
 	})
 
+/*
 	.createTable('locations-issues', locationsIssues => {
 		locationsIssues.increments();
 		locationsIssues.integer('locationsId', 9)
@@ -98,7 +98,7 @@ exports.up = function(knex) {
 exports.down = function(knex) {
  	return knex.schema
 		 	// .dropTableIfExists('locations-issues')
-		 	// .dropTableIfExists('users-locations')
+		 	.dropTableIfExists('users-locations')
 		 	.dropTableIfExists('issues')
 		 	.dropTableIfExists('users')
 		 	.dropTableIfExists('locations');
