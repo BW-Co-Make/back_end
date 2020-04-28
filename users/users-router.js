@@ -82,7 +82,7 @@ router.delete('/:id/issues/:issueid', alfred, check.validateUserId, (req, res) =
       res.status(200).json({message: 'The issue was successfully deleted'})
     })
     .catch(err=>{
-      res.status(500).json({message: "Server failed to remove the user", error: err})
+      res.status(500).json({message: "Server failed to remove the issue", error: err})
     })
   });
 
