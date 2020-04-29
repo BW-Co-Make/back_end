@@ -8,7 +8,6 @@ module.exports = {
   findUserLocation,
   update,
   remove,
-  addUserIssues,
   getUserIssues
 //   updateIssues,
 //   removeIssue
@@ -59,11 +58,7 @@ function remove(id) {
       .del();
 };
 
-async function addUserIssues(issue){
-    console.log('5', issue)
-    const [id] = await db("issues").insert(issue, "id")
-    return issue;
-}
+
 
 function getUserIssues(id){
     return db("users")

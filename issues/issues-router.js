@@ -43,7 +43,7 @@ router.get("/", (req, res) => {
             })
             .catch(err => {
                 res.status(500).json({error: "Server could not add issue when assigning location", error: err})
-              });
+            });
         })
         .catch(err => {
           res.status(500).json({message: "Server could not add issue due to location error", error: err})

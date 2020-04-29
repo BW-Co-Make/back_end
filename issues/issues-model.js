@@ -20,9 +20,9 @@ function findBy(filter) {
 
 async function add(issue) {
     console.log('issue', issue)
-  const [id] = await db("issues").insert(issue, "id");
+    const [id] = await db("issues").insert(issue, "id");
 
-  return findById(id);
+    return findById(id);
 }
 
 function findById(id) {
