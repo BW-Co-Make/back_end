@@ -76,34 +76,24 @@ function validateIssue(req, res, next) {
 }
 
 function handleUsersLocations(req, res, next) {
-  console.log('the body', req.body)
-  console.log('Should be first, id:', req.body.id)
   console.log('zip_code:', req.body.zip_code)
-  let { id } = req.body;
   let { zip_code } = req.body;
-  let userLocation = {
-    usersId: id
-}; // initialize object with usersId to later insert into users_location table
   Locations.findBy({ zip_code }).then(location =>{
     console.log('location findBy in register', location) // check if that zip code is an existing location
     if(location.length < 1){
         Locations.add({ zip_code }) // if not add it
-        .then(([assignment]) =>{
+        .then(assignment =>{
             console.log('assignment in add location promise', assignment);
-            userLocation.locationsId = assignment.id // assign the id of returned location to userLocation
         })
         .catch(err=>{
             console.log(err);
         }) 
     } else {
-        console.log('why this?')
-        userLocation.locationsId = location[0].id // assign location
+      console.log(res)
     }
     })
     .catch(err=>{
         console.log(err);
     })
-    console.log('What userLocation looks like after registering', userLocation)
-    // Users.usersLocations(userLocation) // insert userLocation into users_locations
     next();
 }
