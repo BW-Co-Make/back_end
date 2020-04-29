@@ -1,6 +1,7 @@
 const db = require("../data/dbConfig.js");
 const Locations = require("../locations/locations-model") // requiring this model to add location if it does not exist on register
 
+
 module.exports = {
   add,
   find,
@@ -9,7 +10,8 @@ module.exports = {
   findUserLocation,
   update,
   remove,
-  getUserIssues
+  getUserIssues,
+  usersLocations
 //   updateIssues,
 //   removeIssue
 };
@@ -24,33 +26,33 @@ function findBy(filter) {
 
 async function add(user) {
   const [id] = await db("users").insert(user, "id"); // add user to users table
-  console.log('Should be first, id:', id)
-  console.log('zip_code:', user.zip_code)
-  let { zip_code } = user
-  let userLocation = {
-    usersId: id
-}; // initialize object with usersId to later insert into users_location table
-  Locations.findBy({ zip_code }).then(location =>{
-    console.log('location findBy in register', location) // check if that zip code is an existing location
-    if(location.length < 1){
-        Locations.add({ zip_code }) // if not add it
-        .then(([assignment]) =>{
-            console.log('assignment in add location promise', assignment);
-            userLocation.locationsId = assignment.id // assign the id of returned location to userLocation
-        })
-        .catch(err=>{
-            console.log(err);
-        }) 
-    } else {
-        console.log('why this?')
-        userLocation.locationsId = location[0].id // assign location
-    }
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-    console.log('What userLocation looks like after registering', userLocation)
-    await usersLocations(userLocation) // insert userLocation into users_locations
+//   console.log('Should be first, id:', id)
+//   console.log('zip_code:', user.zip_code)
+//   let { zip_code } = user
+//   let userLocation = {
+//     usersId: id
+// }; // initialize object with usersId to later insert into users_location table
+//   Locations.findBy({ zip_code }).then(location =>{
+//     console.log('location findBy in register', location) // check if that zip code is an existing location
+//     if(location.length < 1){
+//         Locations.add({ zip_code }) // if not add it
+//         .then(([assignment]) =>{
+//             console.log('assignment in add location promise', assignment);
+//             userLocation.locationsId = assignment.id // assign the id of returned location to userLocation
+//         })
+//         .catch(err=>{
+//             console.log(err);
+//         }) 
+//     } else {
+//         console.log('why this?')
+//         userLocation.locationsId = location[0].id // assign location
+//     }
+//     })
+//     .catch(err=>{
+//         console.log(err);
+//     })
+//     console.log('What userLocation looks like after registering', userLocation)
+//     await usersLocations(userLocation) // insert userLocation into users_locations
   return findById(id);
 }
 
