@@ -31,10 +31,11 @@ let expectedIssue = [
 ]
 
 describe('issues-router', () => {
-    afterEach(async () =>{
-        await db('issues').truncate()
-    })
     describe('GET /', () => {
+        afterEach(async () =>{
+            await db('issues').truncate();
+            await db('users').truncate();
+        })
         it('should return 200 OK', async () => {
             return request(server)
             .get('/api/issues')
@@ -52,7 +53,7 @@ describe('issues-router', () => {
                 .send(login)
                 .then(res =>{
                 const token = res.body.token;
-                console.log('test issue', testIssue)
+                // console.log('test issue', testIssue)
                     return request(server)
                     .post('/api/issues')
                     .set('Authorization', token)
@@ -61,7 +62,7 @@ describe('issues-router', () => {
                         return request(server)
                         .get('/api/issues')
                         .then(res => {
-                            console.log('res.body', res.body)
+                            // console.log('res.body', res.body)
                             expect(res.body).toEqual(expect.arrayContaining(expectedIssue))
                         })
                     });
@@ -69,22 +70,51 @@ describe('issues-router', () => {
             });
         });
     });
-    
-    // user register and login for protected endpoints
-    // return request(server)
-    // .post('/api/auth/register')
-    // .send(testUser).then(res => {
-    //     return request(server)
-    //     .post('/api/auth/login')
-    //     .send(testUser)
-    //     .then(res =>{
-    //         const token = res.body.token;
-    //         return request(server)
-    //         .get('/api/jokes')
-    //         .set('Authorization', token)
-    //         .then(res => {
-    //             expect(res.status).toBe(200)
-    //         });
-    //      }); 
-    // });
+
+    describe('POST /', () => {
+        afterEach(async () =>{
+            await db('issues').truncate();
+            await db('users').truncate();
+        })
+        it('should return a 201 created', async () => {
+            return request(server)
+            .post('/api/auth/register')
+            .send(register)
+            .then(res => {
+                return request(server)
+                .post('/api/auth/login')
+                .send(login)
+                .then(res =>{
+                const token = res.body.token;
+                    return request(server)
+                    .post('/api/issues')
+                    .set('Authorization', token)
+                    .send(testIssue)
+                    .then(res => {
+                        expect(res.status).toBe(201);
+                    })
+                });
+            }); 
+        });
+        it('should return an object of the created issue', async () => {
+            return request(server)
+            .post('/api/auth/register')
+            .send(register)
+            .then(res => {
+                return request(server)
+                .post('/api/auth/login')
+                .send(login)
+                .then(res =>{
+                const token = res.body.token;
+                    return request(server)
+                    .post('/api/issues')
+                    .set('Authorization', token)
+                    .send(testIssue)
+                    .then(res => {
+                        expect(res.body).toMatchObject(expectedIssue[0]);
+                    })
+                });
+            }); 
+        });
+    });
 });
