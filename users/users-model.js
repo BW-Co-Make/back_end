@@ -12,8 +12,6 @@ module.exports = {
   remove,
   getUserIssues,
   usersLocations
-//   updateIssues,
-//   removeIssue
 };
 
 function find() {
@@ -26,20 +24,20 @@ function findBy(filter) {
 
 async function add(user) {
   const [id] = await db("users").insert(user, "id"); // add user to users table
-  console.log('Should be first, id:', id)
-  console.log('zip_code:', user.zip_code)
+//   console.log('Should be first, id:', id)
+//   console.log('zip_code:', user.zip_code)
   let { zip_code } = user
   let connectLocation = {
     usersId: id
     }; // initialize object with usersId to later insert into users_location table
   Locations.findBy({ zip_code }).then(([location]) =>{
-    console.log('location findBy in register', location);
+    // console.log('location findBy in register', location);
     connectLocation.locationsId = location.id;
-    console.log('connectLocation obj before inserting', connectLocation)
+    // console.log('connectLocation obj before inserting', connectLocation)
     usersLocations(connectLocation);
     })
     .catch(err=>{
-        console.log(err);
+        res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
     })
 
   return findById(id);
@@ -53,7 +51,7 @@ function findById(id) {
 };
 
 function findUserLocation(id) {
-    console.log('2', id)
+    // console.log('2', id)
     // What this SHOULD do is grab the locationId from the joint table so I can assign it to the new issue
     return db("users")
     .join("users_locations as ul", "ul.usersId", "users.id")

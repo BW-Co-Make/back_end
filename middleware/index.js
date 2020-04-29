@@ -76,24 +76,24 @@ function validateIssue(req, res, next) {
 }
 
 function handleUsersLocations(req, res, next) {
-  console.log('zip_code:', req.body.zip_code)
+  // console.log('zip_code:', req.body.zip_code)
   let { zip_code } = req.body;
   Locations.findBy({ zip_code }).then(location =>{
-    console.log('location findBy in register', location) // check if that zip code is an existing location
+    // console.log('location findBy in register', location) // check if that zip code is an existing location
     if(location.length < 1){
         Locations.add({ zip_code }) // if not add it
         .then(assignment =>{
             console.log('assignment in add location promise', assignment);
         })
         .catch(err=>{
-            console.log(err);
+          res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
         }) 
     } else {
       console.log(res)
     }
     })
     .catch(err=>{
-        console.log(err);
+      res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
     })
     next();
 }
