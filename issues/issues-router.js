@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
     });
     
     router.get("/:id", check.validateIssueId, (req, res) => {
-        
         res.status(200).json(req.issue);
     });
     
@@ -27,19 +26,24 @@ router.get("/", (req, res) => {
         let id = req.decodedToken.userId
         const newIssue = req.body;
         newIssue.userId = id; // assign user id to body
-        console.log(newIssue)
-        Users.findUserLocation(id).then(userLocation =>{
-            console.log(userLocation);
-            let location = userLocation[0]; // assign location foreign key
-            newIssue.zip_code = location.zip_code
-            newIssue.locationId = location.locationId; // add foreign key to issue body
-            Users.addUserIssues(newIssue)
-            .then(user => {
-              res.status(200).json(user)
+        console.log('1', newIssue)
+        Users.findUserLocation(id)
+        .then(userLocation =>{
+            console.log('3', userLocation)
+            let zipId = userLocation[0].locationsId;
+            let zipCode = userLocation[0].zip_code;
+            // assign location foreign key and zip_code
+            newIssue.zip_code = zipCode;
+            newIssue.locationsId = zipId;
+            console.log('4', newIssue) // add foreign key to issue body
+            Issues.add(newIssue)
+            .then(issue => {
+                console.log('6', issue)
+              res.status(200).json(issue)
             })
             .catch(err => {
                 res.status(500).json({error: "Server could not add issue when assigning location", error: err})
-              });
+            });
         })
         .catch(err => {
           res.status(500).json({message: "Server could not add issue due to location error", error: err})

@@ -63,7 +63,7 @@ URL: /api/auth/register
 ```
 
 *** ***
-### Login (Unrestricted Route)
+### LOGIN (Unrestricted Route)
 HTTP Request: POST
 
 URL: /api/auth/login
@@ -116,7 +116,7 @@ URL: /api/auth/login
 }
 ```
 
-### Get all Users
+### GET ALL USERS
 HTTP Request: GET
 
 URL: /api/users
@@ -163,7 +163,7 @@ URL: /api/users
 }
 ```
 *** ***
-### Get User by ID
+### GET USER BY ID
 HTTP Request: GET
 
 URL: /api/users/:id

@@ -1,11 +1,13 @@
 const Users = require('../users/users-model')
 const Issues = require('../issues/issues-model')
+const Locations = require('../locations/locations-model')
 
 module.exports = {
     validateUser,
     validateUserId,
     validateIssueId,
-    validateIssue
+    validateIssue,
+    handleUsersLocations
 }
 
 //custom middleware
@@ -71,4 +73,27 @@ function validateIssue(req, res, next) {
   }
   }
   next();
+}
+
+function handleUsersLocations(req, res, next) {
+  // console.log('zip_code:', req.body.zip_code)
+  let { zip_code } = req.body;
+  Locations.findBy({ zip_code }).then(location =>{
+    // console.log('location findBy in register', location) // check if that zip code is an existing location
+    if(location.length < 1){
+        Locations.add({ zip_code }) // if not add it
+        .then(assignment =>{
+            console.log('assignment in add location promise', assignment);
+        })
+        .catch(err=>{
+          res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
+        }) 
+    } else {
+      console.log(res)
+    }
+    })
+    .catch(err=>{
+      res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
+    })
+    next();
 }
