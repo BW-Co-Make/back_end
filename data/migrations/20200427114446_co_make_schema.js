@@ -21,12 +21,6 @@ exports.up = function(knex) {
 			.notNullable();
 		users.string('zip_code', 10)
 			.notNullable();
-		users.integer('locationsId', 10)
-			.unsigned()
-	        .references('id')
-	        .inTable('locations')
-			.onUpdate('CASCADE')
-        	.onDelete('CASCADE');
 	})
 
 	.createTable('issues', issues => {
