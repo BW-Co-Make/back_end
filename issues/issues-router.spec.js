@@ -42,7 +42,7 @@ describe('issues-router', () => {
                 expect(res.status).toBe(200)
             })
         });
-        it('should return an array of issue objects', async () => {
+        it('should return an array with an issue object', async () => {
             return request(server)
             .post('/api/auth/register')
             .send(register)

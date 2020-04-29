@@ -11,7 +11,7 @@ module.exports = {
 
 function find() {
   return db("issues")
-//   .select("id","zip_code", "title", "post", "upvote");
+  .select("id","zip_code", "title", "post", "upvote");
 }
 
 function findBy(filter) {
