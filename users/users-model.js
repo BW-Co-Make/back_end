@@ -25,24 +25,25 @@ function findBy(filter) {
 async function add(user) {
   const [id] = await db("users").insert(user, "id"); // add user to users table
   console.log('Should be first, id:', id)
-  console.log('zip_code if defined:', user.zip_code)
+  console.log('zip_code:', user.zip_code)
   let { zip_code } = user
   let userLocation = {
     usersId: id
 }; // initialize object with usersId to later insert into users_location table
   Locations.findBy({ zip_code }).then(location =>{
-    console.log('location findBy in register', location) // check if that zip code is an existing location 
-    if(location){
-        userLocation.locationsId = location.id // assign location
-    } else {
-        Locations.add(location) // if not add it
-        .then(assignment =>{
+    console.log('location findBy in register', location[0]) // check if that zip code is an existing location
+    if(undefined){
+        Locations.add({ zip_code }) // if not add it
+        .then(([assignment]) =>{
             console.log('assignment in add location promise', assignment);
             userLocation.locationsId = assignment.id // assign the id of returned location to userLocation
         })
         .catch(err=>{
             console.log(err);
         }) 
+
+    } else {
+        userLocation.locationsId = location.id // assign location
     }
     })
     .catch(err=>{
