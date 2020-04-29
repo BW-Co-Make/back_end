@@ -31,8 +31,8 @@ async function add(user) {
     usersId: id
 }; // initialize object with usersId to later insert into users_location table
   Locations.findBy({ zip_code }).then(location =>{
-    console.log('location findBy in register', location[0]) // check if that zip code is an existing location
-    if(undefined){
+    console.log('location findBy in register', location) // check if that zip code is an existing location
+    if(location.length < 1){
         Locations.add({ zip_code }) // if not add it
         .then(([assignment]) =>{
             console.log('assignment in add location promise', assignment);
@@ -41,9 +41,9 @@ async function add(user) {
         .catch(err=>{
             console.log(err);
         }) 
-
     } else {
-        userLocation.locationsId = location.id // assign location
+        console.log('why this?')
+        userLocation.locationsId = location[0].id // assign location
     }
     })
     .catch(err=>{
