@@ -19,14 +19,14 @@ function findBy(filter) {
 }
 
 async function add(issue) {
-    console.log('issue', issue)
+    // console.log('issue', issue)
     const [id] = await db("issues").insert(issue, "id");
 
     return findById(id);
 }
 
 function findById(id) {
-    console.log(id)
+    // console.log(id)
   return db("issues")
     .select("id","zip_code", "title", "post", "upvote")
     .where({ id })

@@ -117,4 +117,21 @@ describe('issues-router', () => {
             }); 
         });
     });
+
+    describe('PUT /', () => {
+        afterEach(async () =>{
+            await db('issues').truncate();
+            await db('users').truncate();
+        })
+        it.todo('should return a 200 OK')
+        it.todo('should return an object of the updated issue'); 
+    });
+    describe('DELETE /', () => {
+        afterEach(async () =>{
+            await db('issues').truncate();
+            await db('users').truncate();
+        })
+        it.todo('should return a 200 OK')
+        it.todo('should return an object of the updated issue'); 
+    });
 });
