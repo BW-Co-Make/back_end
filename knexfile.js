@@ -39,10 +39,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      filename: './data/co_make.db3'
-    },
-    useNullAsDefault: true,
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: './data/migrations',
     },
