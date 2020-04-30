@@ -455,6 +455,7 @@ URL: /api/users/:id
         "username": "robin",
         "first_name": "Dick",
         "last_name": "Grayson",
+        "zip_code": "54305"
     }
 ```
 
@@ -467,6 +468,7 @@ URL: /api/users/:id
         "username": "Nightwing",
         "first_name": "Dick",
         "last_name": "Grayson",
+        "zip_code": "54305"
     }
 ```
 ##### 400 (Bad Request)
