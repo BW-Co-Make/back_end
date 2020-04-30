@@ -89,7 +89,7 @@ function handleUsersLocations(req, res, next) {
           res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
         }) 
     } else {
-      console.log('location verified') // what should we return here, if anything at all?
+      //console.log(res)
     }
     })
     .catch(err=>{
