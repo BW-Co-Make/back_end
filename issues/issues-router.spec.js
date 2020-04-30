@@ -30,6 +30,11 @@ let expectedIssue = [
     }
 ]
 
+let updateIssue = {
+    title: 'Update Title',
+    post: 'bob ross lorem ipsom'
+}
+
 describe('issues-router', () => {
     describe('GET /', () => {
         afterEach(async () =>{
@@ -123,7 +128,32 @@ describe('issues-router', () => {
             await db('issues').truncate();
             await db('users').truncate();
         })
-        it.todo('should return a 200 OK')
+        it('should return a 200 OK', async () => {
+            return request(server)
+            .post('/api/auth/register')
+            .send(register)
+            .then(res => {
+                return request(server)
+                .post('/api/auth/login')
+                .send(login)
+                .then(res =>{
+                const token = res.body.token;
+                    return request(server)
+                    .post('/api/issues')
+                    .set('Authorization', token)
+                    .send(testIssue)
+                    .then(res => {
+                        return request(server)
+                        .put('/api/issues/1')
+                        .set('Authorization', token)
+                        .send(updateIssue)
+                        .then(res => {
+                            expect(res.status).toBe(200)
+                        })
+                    })
+                });
+            }); 
+        })
         it.todo('should return an object of the updated issue'); 
     });
     describe('DELETE /', () => {
