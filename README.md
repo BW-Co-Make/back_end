@@ -3,7 +3,7 @@ https://co-make-bw.herokuapp.com/
 
 # User Routes
 
-### Register a User (Unrestricted Route)
+### REGISTER A USER (Unrestricted Route)
 HTTP Request: POST
 
 URL: /api/auth/register
@@ -116,7 +116,7 @@ URL: /api/auth/login
 }
 ```
 
-### GET ALL USERS
+### GET ALL USERS (UNRESTRICTED)
 HTTP Request: GET
 
 URL: /api/users
@@ -140,14 +140,14 @@ URL: /api/users
     }
 ]
 ```
-##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 400 (Bad Request) // (IF RESTRICTED)
 > Will receive a 400 response if required information is missing from the body
 ```javascript
 {
   "message": "No credentials provided"
 }
 ```
-##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 401 (Unauthorized) // (IF RESTRICTED)
 > Will receive a 401 response if credentials are invalid
 ```javascript
 {
@@ -163,7 +163,7 @@ URL: /api/users
 }
 ```
 *** ***
-### GET USER BY ID
+### GET USER BY ID (UNRESTRICTED)
 HTTP Request: GET
 
 URL: /api/users/:id
@@ -180,14 +180,14 @@ URL: /api/users/:id
     "zip_code": "73645"
 }
 ```
-##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 400 (Bad Request) // (IF RESTRICTED)
 > Will receive a 400 response if required information is missing from the body
 ```javascript
 {
   "message": "No credentials provided"
 }
 ```
-##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 401 (Unauthorized) // (IF RESTRICTED)
 > Will receive a 401 response if credentials are invalid
 ```javascript
 {
@@ -210,7 +210,7 @@ URL: /api/users/:id
 }
 ```
 
-### GET A SINGLE USER'S ISSUES
+### GET A SINGLE USER'S ISSUES (UNRESTRICTED)
 HTTP Request: GET
 
 URL: /api/users/:id/issues
@@ -235,14 +235,14 @@ URL: /api/users/:id/issues
     ]
 }
 ```
-##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 400 (Bad Request) // (IF RESTRICTED)
 > Will receive a 400 response if required information is missing from the body
 ```javascript
 {
   "message": "No credentials provided"
 }
 ```
-##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 401 (Unauthorized) // (IF RESTRICTED)
 > Will receive a 401 response if credentials are invalid
 ```javascript
 {
@@ -264,7 +264,9 @@ URL: /api/users/:id/issues
   "error": "Server error information"
 }
 ```
-### GET ALL ISSUES
+# Issue Routes
+
+### GET ALL ISSUES (UNRESTRICTED)
 HTTP Request: GET
 
 URL: /api/issues
@@ -283,14 +285,14 @@ URL: /api/issues
   }
 ]
 ```
-##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 400 (Bad Request) // (IF RESTRICTED)
 > Will receive a 400 response if required information is missing from the body
 ```javascript
 {
   "message": "No credentials provided"
 }
 ```
-##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+##### 401 (Unauthorized) // (IF RESTRICTED)
 > Will receive a 401 response if credentials are invalid
 ```javascript
 {
@@ -313,7 +315,7 @@ URL: /api/issues
 }
 ```
 
-### POST AN ISSUE (Restricted Route)
+### POST AN ISSUE (RESTRICTED)
 HTTP Request: POST
 
 URL: /api/issues
@@ -330,10 +332,8 @@ URL: /api/issues
 ##### Example
 ```javascript
 {
-    "id": 1,
-    "Title": "Arkham Asylum Exterior",
-    "Post": "I think gotham needs to repaint this drab and dreary building, purple and green perhaps? 🤡",
-    "zip_code": "53540"
+    "title": "Arkham Asylum Exterior",
+    "post": "I think gotham needs to repaint this drab and dreary building, purple and green perhaps? 🤡",
 }
 ```
 
@@ -358,7 +358,21 @@ URL: /api/issues
   "message": "No credentials provided"
 }
 ```
-
+```
+##### 400 (Bad Request) // (IF RESTRICTED)
+> Will receive a 400 response if required information is missing from the body
+```javascript
+{
+  "message": "No credentials provided"
+}
+```
+##### 401 (Unauthorized) // (IF RESTRICTED)
+> Will receive a 401 response if credentials are invalid
+```javascript
+{
+  "message": "Access Denied: Unauthorized"
+}
+```
 ##### 500 (Internal Server Error)
 > Will receive a 500 response if there is a problem with the server
 ```javascript
