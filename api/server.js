@@ -7,7 +7,8 @@ const locationsRouter = require("../locations/locations-router.js");
 const usersRouter = require("../users/users-router.js");
 const authRouter = require("../auth/auth-router.js");
 const issuesRouter = require("../issues/issues-router")
-const authenticator = require("../auth/authenticator");
+const authenticator = require("../auth/authenticator"); // if authenticator is ever needed to lock an entire router
+// authenticator imported to routers individually as alfred
 
 const server = express();
 
@@ -16,7 +17,7 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-// add authenticator on users perhaps later, for now recieve a list
+
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/issues", issuesRouter);
