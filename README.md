@@ -264,6 +264,54 @@ URL: /api/users/:id/issues
   "error": "Server error information"
 }
 ```
+### GET ALL ISSUES
+HTTP Request: GET
+
+URL: /api/issues
+
+#### Response
+##### 200 (OK)
+> Will receive a 200 response with a user object
+```javascript
+[
+  {
+      "id": 1,
+      "zip_code": "53540",
+      "title": "ACE Chemicals",
+      "post": "Can we please just level this place?",
+      "upvote": 0
+  }
+]
+```
+##### 400 (Bad Request) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+> Will receive a 400 response if required information is missing from the body
+```javascript
+{
+  "message": "No credentials provided"
+}
+```
+##### 401 (Unauthorized) // PENDING WHETHER THIS IS DECIDED TO BE RESTRICTED OR NOT
+> Will receive a 401 response if credentials are invalid
+```javascript
+{
+  "message": "Access Denied: Unauthorized"
+}
+```
+##### 404 (Not Found)
+> Will receive a 404 response if parameter ID is invalid
+```javascript
+{
+  "message": "User with the id of ${id} was not found"
+}
+```
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "message": "The user information could not be retrieved",
+  "error": "Server error information"
+}
+```
 
 ### POST AN ISSUE (Restricted Route)
 HTTP Request: POST
@@ -455,6 +503,7 @@ URL: /api/users/:id
         "username": "robin",
         "first_name": "Dick",
         "last_name": "Grayson",
+        "zip_code": "54305"
     }
 ```
 
@@ -467,6 +516,7 @@ URL: /api/users/:id
         "username": "Nightwing",
         "first_name": "Dick",
         "last_name": "Grayson",
+        "zip_code": "54305"
     }
 ```
 ##### 400 (Bad Request)
