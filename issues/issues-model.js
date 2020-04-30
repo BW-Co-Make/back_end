@@ -6,7 +6,8 @@ module.exports = {
   findBy,
   findById,
   update,
-  remove
+  remove,
+  upvote
 };
 
 function find() {
@@ -33,15 +34,11 @@ function findById(id) {
     .first();
 };
 
-
-
 function update(id, changes) {
     return db('issues')
       .where({ id })
       .update(changes);
 };
-
-
 
 function remove(id) {
     return db('issues')
@@ -49,5 +46,10 @@ function remove(id) {
       .del();
 };
 
+function upvote(issue_id, plusOne) {
+  return db('issues')
+    .where('id', issue_id)
+    .update('upvote', plusOne);
+}
 
 
