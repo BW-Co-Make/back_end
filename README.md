@@ -431,6 +431,39 @@ URL: /api/issues
 }
 ```
 
+### UPVOTE AN ISSUE
+HTTP Request: GET
+
+URL: api/issues/:id/upvote
+
+#### Response
+##### 200 (OK)
+> Will receive a 200 response with a message
+```javascript
+[
+  {
+    "message": "Issue upvoted!"
+  }
+]
+```
+
+##### 400 (Server couldn't update)
+``` javascript
+[
+  {
+    "error": "Couldn't upvote the issue"
+  }
+]
+```
+##### 500 (Issue not found)
+``` javascript
+[
+  {
+    "error": "Issue ID doesn't exist"
+  }
+]
+```
+
 ### POST AN ISSUE (RESTRICTED)
 HTTP Request: POST
 
