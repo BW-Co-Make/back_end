@@ -26,10 +26,10 @@ router.get("/", (req, res) => {
         let id = req.decodedToken.userId
         const newIssue = req.body;
         newIssue.userId = id; // assign user id to body
-        console.log('1', newIssue)
+        // console.log('1', newIssue)
         Users.findUserLocation(id)
         .then(userLocation =>{
-            console.log('3', userLocation)
+            // console.log('3', userLocation)
             let zipId = userLocation[0].locationsId;
             let zipCode = userLocation[0].zip_code;
             // assign location foreign key and zip_code
