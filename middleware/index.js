@@ -83,13 +83,13 @@ function handleUsersLocations(req, res, next) {
     if(location.length < 1){
         Locations.add({ zip_code }) // if not add it
         .then(assignment =>{
-            console.log('assignment in add location promise', assignment);
+            console.log('new location added'); // what should we return here
         })
         .catch(err=>{
           res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})
         }) 
     } else {
-      console.log(res)
+      console.log('location verified') // what should we return here, if anything at all?
     }
     })
     .catch(err=>{
