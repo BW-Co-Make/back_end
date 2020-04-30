@@ -52,7 +52,8 @@ router.get("/", (req, res) => {
       });
      
       router.put('/:id', alfred, check.validateIssueId, (req, res) => {
-        Issues.update(req.params.id, req.body)
+        const { id } = req.params
+        Issues.update(id, req.body)
         .then(issue => {
           res.status(200).json(issue)
         })

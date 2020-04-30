@@ -34,13 +34,13 @@ function validateUser(req, res, next) {
      return res.status(400).json({ message: "missing user data" })
    } else {
     if (!req.body.username) {
-     return res.status(400).json({ message: "missing required field" })
+     return res.status(400).json({ message: "missing required field: username" })
    } else if(!req.body.first_name){
-    return res.status(400).json({ message: "missing required field"})
+    return res.status(400).json({ message: "missing required field: first_name"})
    } else if(!req.body.last_name) {
-    return res.status(400).json({ message: "missing required field"})
+    return res.status(400).json({ message: "missing required field: last_name"})
    } else if(!req.body.zip_code) {
-    return res.status(400).json({ message: "missing required field"})
+    return res.status(400).json({ message: "missing required field: zip_code"})
    }
    next();
    }
@@ -69,7 +69,7 @@ function validateIssue(req, res, next) {
     return res.status(400).json({ message: "missing issue data" })
   } else {
    if (!req.body.text) {
-    return res.status(400).json({ message: "missing required field" }) // chain else ifs for required fields
+    return res.status(400).json({ message: "missing required text field" }) // chain else ifs for required fields
   }
   }
   next();
@@ -79,11 +79,11 @@ function handleUsersLocations(req, res, next) {
   // console.log('zip_code:', req.body.zip_code)
   let { zip_code } = req.body;
   Locations.findBy({ zip_code }).then(location =>{
-    // console.log('location findBy in register', location) // check if that zip code is an existing location
+    // check if that zip code is an existing location
     if(location.length < 1){
         Locations.add({ zip_code }) // if not add it
         .then(assignment =>{
-            console.log('new location added'); // what should we return here
+            console.log('new location added'); // what should we return here?
         })
         .catch(err=>{
           res.status(500).json({errorMessage: 'Server failed to find a location, contact backend for support', error: err})

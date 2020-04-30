@@ -51,7 +51,7 @@ function findById(id) {
 };
 
 function findUserLocation(id) {
-    // console.log('2', id)
+    console.log('2', id)
     // What this SHOULD do is grab the locationId from the joint table so I can assign it to the new issue
     return db("users")
     .join("users_locations as ul", "ul.usersId", "users.id")
